@@ -1,6 +1,8 @@
 "use server";
 import { redirect } from "next/navigation";
+import prisma from "@/utils/db";
 import { revalidatePath } from "next/cache";
+
 export const getAllTasks = async () => {
   const tasks = await prisma.task.findMany({
     orderBy: {

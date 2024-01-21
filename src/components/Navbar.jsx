@@ -1,7 +1,7 @@
 import Link from "next/link";
 const Navbar = () => {
   return (
-    <div className="flex justify-between text-black font-semibold p-4 items-center">
+    <div className="flex justify-between text-white bg-slate-900 font-semibold p-4 items-center">
       <h1 className="border border-primary p-4 rounded-3xl">
         <Link className="" href={"/todo"}>
           List of Tasks
