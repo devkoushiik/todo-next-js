@@ -31,7 +31,7 @@ const EditTask = ({ task }) => {
             type="submit"
             className="btn btn-primary btn-block btn-md uppercase mt-3 text-white h-10"
           >
-            edit
+            UPDATE
           </button>
         </div>
       </form>
