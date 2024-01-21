@@ -19,7 +19,7 @@ const EditTask = ({ task }) => {
         {/* completed */}
         <div className="form-control">
           <label htmlFor="completed" className="label cursor-pointer">
-            <span className="label-text text-xl text-black">completed</span>
+            <span className="label-text text-xl text-white">completed</span>
             <input
               type="checkbox"
               defaultChecked={completed}

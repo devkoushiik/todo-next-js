@@ -4,7 +4,11 @@ import { getAllTasks } from "@/utils/actions";
 const TaskList = async () => {
   const tasks = await getAllTasks();
   if (tasks.length === 0) {
-    return <h2 className="mt-8 font-medium text-lg">No tasks to show...</h2>;
+    return (
+      <h2 className="text-center py-5 font-medium text-lg">
+        No tasks to show 🙃
+      </h2>
+    );
   }
   return (
     <ul className="mt-8">

@@ -6,7 +6,7 @@ const EditTaskPage = async ({ params }) => {
   const task = await getTask(params.id);
   return (
     <div className="mb-16">
-      <Link className="btn btn-info mt-5 text-white" href={"/tasks"}>
+      <Link className="btn btn-info mt-5 text-white" href={"/"}>
         back to todo page
       </Link>
       <EditTask task={task} />

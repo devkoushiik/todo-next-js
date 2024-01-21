@@ -2,6 +2,7 @@
 import { redirect } from "next/navigation";
 import prisma from "@/utils/db";
 import { revalidatePath } from "next/cache";
+import { z } from "zod";
 
 export const getAllTasks = async () => {
   const tasks = await prisma.task.findMany({
@@ -13,28 +14,42 @@ export const getAllTasks = async () => {
 };
 
 // server actions
-export const createTask = async (formData) => {
-  "use server";
-  let content = formData.get("content");
-  await prisma.task.create({
-    data: {
-      content,
-    },
+export const createTask = async (prevState, formData) => {
+  //   await new Promise((resolve) => setTimeout(resolve, 5000));
+  const Task = z.object({
+    content: z.string().min(3),
   });
-  // revalidation
-  revalidatePath("/");
-  content = "";
+  try {
+    let content = formData.get("content");
+    Task.parse({ content });
+    await prisma.task.create({
+      data: {
+        content,
+      },
+    });
+
+    // revalidation
+    revalidatePath("/");
+
+    return { message: "success" };
+  } catch (error) {
+    return { message: "error" };
+  }
 };
-//
 
 // delete
-export const deleteTask = async (formData) => {
-  const id = formData.get("id");
-  const text = formData.get("text");
-  await prisma.task.delete({
-    where: { id },
-  });
-  revalidatePath("/");
+export const deleteTask = async (prevState, formData) => {
+  try {
+    const id = formData.get("id");
+    await prisma.task.delete({
+      where: { id },
+    });
+    // revalidation
+    revalidatePath("/");
+    return { message: "success" };
+  } catch (error) {
+    return { message: "error" };
+  }
 };
 
 // edit task
